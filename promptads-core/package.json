@@ -1,0 +1,29 @@
+{
+  "name": "@promptads/core",
+  "version": "0.1.0",
+  "description": "PromptAds Core - AI-native advertising engine",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0"
+  },
+  "keywords": [
+    "advertising",
+    "ads",
+    "llm",
+    "ai",
+    "monetization",
+    "sdk"
+  ],
+  "author": "PromptAds",
+  "license": "MIT"
+}

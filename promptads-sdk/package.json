@@ -1,0 +1,27 @@
+{
+  "name": "@promptads/sdk-web",
+  "version": "0.1.0",
+  "description": "PromptAds SDK for web applications",
+  "main": "dist/web/index.js",
+  "types": "dist/web/index.d.ts",
+  "browser": "dist/web/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "promptads",
+    "advertising",
+    "ads",
+    "llm",
+    "sdk",
+    "monetization"
+  ],
+  "author": "PromptAds",
+  "license": "MIT"
+}
