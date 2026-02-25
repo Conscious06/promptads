@@ -3,569 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PromptAds - Monetize Your LLM App</title>
-    <meta name="description" content="AI-native advertising network for LLM applications. 70% revenue share for publishers.">
+    <title>PromptAds — The ad network for AI</title>
+    <meta name="description" content="Native advertising for LLM applications. Revenue share for publishers.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #000000;
+            --bg-warm: #0a0908;
+            --text: #f5f5f0;
+            --text-muted: #8a8a85;
+            --accent: #d4a853;
+            --accent-dim: #a38542;
+            --line: #2a2a28;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #0a0a0f;
-            --bg-secondary: #12121a;
-            --text: #ffffff;
-            --text-secondary: #a0a0b0;
-            --accent: #6366f1;
-            --accent-glow: #818cf8;
-            --success: #10b981;
-            --border: #1e1e2e;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 980px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Header */
-        header {
-            padding: 20px 0;
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
-        .header-content {
+        nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
             color: var(--text);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            letter-spacing: -0.01em;
         }
 
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+        .logo span {
+            color: var(--accent);
         }
 
-        nav {
+        .nav-links {
             display: flex;
             gap: 32px;
-            align-items: center;
+            list-style: none;
         }
 
-        nav a {
-            color: var(--text-secondary);
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 13px;
             transition: color 0.2s;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             color: var(--text);
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-            color: white;
-            border: none;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            background: rgba(99, 102, 241, 0.1);
         }
 
         /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding-top: 100px;
+            text-align: center;
+            padding: 120px 24px 80px;
             position: relative;
-            overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(212,168,83,0.08) 0%, transparent 60%);
             pointer-events: none;
         }
 
-        .hero-content {
-            text-align: center;
-            position: relative;
-            z-index: 1;
+        .tagline {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 24px;
         }
 
-        .badge {
+        .hero h1 {
+            font-size: clamp(36px, 7vw, 64px);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 700px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .cta-button {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 100px;
+            padding: 14px 28px;
+            background: var(--text);
+            color: var(--bg);
+            text-decoration: none;
             font-size: 14px;
-            color: var(--accent-glow);
-            margin-bottom: 24px;
+            font-weight: 500;
+            border-radius: 24px;
+            transition: all 0.3s;
         }
 
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
+        .cta-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 40px rgba(255,255,255,0.15);
+        }
+
+        .cta-button span {
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover span {
+            transform: translateX(4px);
+        }
+
+        /* Abstract Visual */
+        .visual {
+            margin-top: 80px;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a1918 0%, #0d0c0b 100%);
+            border-radius: 24px;
+            border: 1px solid var(--line);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 1px solid var(--line);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .visual::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid var(--accent-dim);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: pulse 8s ease-in-out infinite 2s;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.2; }
         }
 
-        h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(40px, 8vw, 72px);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h1 span {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-desc {
-            font-size: 20px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .hero-buttons {
+        .visual-content {
+            position: relative;
+            z-index: 1;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 16px;
+        }
+
+        .visual-icon {
+            width: 64px;
+            height: 64px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            font-size: 24px;
         }
 
-        .hero-buttons .btn {
-            padding: 16px 32px;
-            font-size: 16px;
-        }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 80px;
-            padding: 32px;
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
+        .visual-text {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
-        /* How it works */
-        .section {
+        /* Grid Section */
+        .grid {
             padding: 120px 0;
+            border-top: 1px solid var(--line);
         }
 
-        .section-header {
+        .grid-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 80px;
         }
 
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 40px;
-            font-weight: 700;
+        .grid-header h2 {
+            font-size: 36px;
             margin-bottom: 16px;
         }
 
-        .section-desc {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+        .grid-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 300;
         }
 
-        .steps {
+        .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            gap: 48px 32px;
         }
 
-        .step {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            position: relative;
+        .feature {
+            text-align: center;
         }
 
-        .step-number {
+        .feature-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            margin: 0 auto 20px;
+            border: 1px solid var(--line);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
         }
 
-        .step h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
+        .feature h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
-        .step p {
-            color: var(--text-secondary);
-            font-size: 15px;
+        .feature p {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
         }
 
-        /* Verticals */
-        .verticals-grid {
+        /* Numbers */
+        .numbers {
+            padding: 80px 0;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .numbers-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 32px;
         }
 
-        .vertical-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
+        .number {
             text-align: center;
-            transition: all 0.2s;
         }
 
-        .vertical-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
+        .number-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 8px;
         }
 
-        .vertical-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
+        .number-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .vertical-name {
-            font-weight: 600;
-            margin-bottom: 4px;
+        /* Quote */
+        .quote-section {
+            padding: 120px 0;
+            text-align: center;
         }
 
-        .vertical-cpc {
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            font-style: italic;
+        }
+
+        .quote-author {
             font-size: 14px;
-            color: var(--success);
-        }
-
-        /* CTA */
-        .cta {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 24px;
-            padding: 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .cta p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
+            color: var(--text-muted);
         }
 
         /* Footer */
         footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
+            padding: 60px 0;
+            border-top: 1px solid var(--line);
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 14px;
         }
 
+        footer p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer .logo {
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .steps {
-                grid-template-columns: 1fr;
-            }
-            .verticals-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            nav {
-                display: none;
-            }
-            .cta {
-                padding: 40px 24px;
-            }
+            .nav-links { display: none; }
+            .features { grid-template-columns: 1fr; gap: 48px; }
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+            .number-value { font-size: 36px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <a href="/" class="logo">
-                <div class="logo-icon">$</div>
-                PromptAds
-            </a>
-            <nav>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#verticals">Verticals</a>
-                <a href="#pricing">Pricing</a>
-                <a href="https://github.com/Conscious06/promptads" target="_blank">Docs</a>
-                <a href="#" class="btn btn-primary">Get Started</a>
-            </nav>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Prompt<span>Ads</span></a>
+            <ul class="nav-links">
+                <li><a href="#how">How it works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="https://github.com/Conscious06/promptads">Docs</a></li>
+            </ul>
+            <a href="#" class="cta-button">Start earning →</a>
         </div>
-    </header>
+    </nav>
 
     <section class="hero">
-        <div class="container hero-content">
-            <div class="badge">
-                <span class="badge-dot"></span>
-                Now in Beta
+        <p class="tagline">The ad network for AI</p>
+        <h1>Monetize conversations.<br>Not interrupts.</h1>
+        <p>Ads that live inside LLM responses. Native. Relevant. Non-intrusive.</p>
+        <a href="#" class="cta-button">
+            Integrate SDK <span>→</span>
+        </a>
+
+        <div class="visual">
+            <div class="visual-content">
+                <div class="visual-icon">$</div>
+                <span class="visual-text">Contextual by default</span>
             </div>
-            
-            <h1>Monetize Your <span>LLM App</span><br>with Native Ads</h1>
-            
-            <p class="hero-desc">
-                The advertising network built for AI applications. 
-                Integrate our SDK and earn revenue from every conversation.
-            </p>
-            
-            <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">
-                    Start Monetizing →
-                </a>
-                <a href="#how-it-works" class="btn btn-secondary">
-                    See How It Works
-                </a>
+        </div>
+    </section>
+
+    <section class="grid" id="how">
+        <div class="container">
+            <div class="grid-header">
+                <h2>Built different</h2>
+                <p>Traditional ads break flow. We enhance it.</p>
             </div>
 
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-value">3-10%</div>
-                    <div class="stat-label">Average CTR</div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">◎</div>
+                    <h3>Inline Placement</h3>
+                    <p>Ads appear naturally within the conversation flow. No popups. No banners.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-value">70%</div>
-                    <div class="stat-label">Publisher Revenue</div>
+                <div class="feature">
+                    <div class="feature-icon">◉</div>
+                    <h3>Context Aware</h3>
+                    <p>We analyze the prompt and match relevant advertisers. Always on-topic.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-value">4+</div>
-                    <div class="stat-label">Verticals</div>
+                <div class="feature">
+                    <div class="feature-icon">○</div>
+                    <h3>70% Revenue</h3>
+                    <p>You keep the majority. No minimums, no commitments. Paid monthly.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-value">5min</div>
-                    <div class="stat-label">Integration Time</div>
+                <div class="feature">
+                    <div class="feature-icon">◇</div>
+                    <h3>5-Minute Setup</h3>
+                    <p>Drop in our SDK. Configure your vertical. Start earning.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">□</div>
+                    <h3>Multiple Verticals</h3>
+                    <p>Dating, productivity, gaming, education. More verticals coming soon.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">△</div>
+                    <h3>Fraud Protection</h3>
+                    <p>Built-in detection for bot traffic and invalid clicks.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="how-it-works">
+    <section class="numbers">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">How It Works</h2>
-                <p class="section-desc">Integrate ads into your LLM app in minutes. No hassle, just revenue.</p>
-            </div>
-
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Install SDK</h3>
-                    <p>Add our lightweight SDK to your app with a few lines of code. Available for web and mobile.</p>
+            <div class="numbers-grid">
+                <div class="number">
+                    <div class="number-value">3–10%</div>
+                    <div class="number-label">Average CTR</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Display Ads</h3>
-                    <p>Our SDK automatically displays context-relevant ads within LLM responses when appropriate.</p>
+                <div class="number">
+                    <div class="number-value">70%</div>
+                    <div class="number-label">Publisher Share</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Earn Revenue</h3>
-                    <p>Get paid for every impression and click. 70% revenue share, paid monthly.</p>
+                <div class="number">
+                    <div class="number-value">4</div>
+                    <div class="number-label">Verticals</div>
+                </div>
+                <div class="number">
+                    <div class="number-value">5min</div>
+                    <div class="number-label">To Integrate</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="verticals">
+    <section class="quote-section">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Supported Verticals</h2>
-                <p class="section-desc">We support multiple verticals with high CPM rates.</p>
-            </div>
-
-            <div class="verticals-grid">
-                <div class="vertical-card">
-                    <div class="vertical-icon">💕</div>
-                    <div class="vertical-name">Dating</div>
-                    <div class="vertical-cpc">$0.50 CPC</div>
-                </div>
-                <div class="vertical-card">
-                    <div class="vertical-icon">💼</div>
-                    <div class="vertical-name">Productivity</div>
-                    <div class="vertical-cpc">$0.25 CPC</div>
-                </div>
-                <div class="vertical-card">
-                    <div class="vertical-icon">🎮</div>
-                    <div class="vertical-name">Gaming</div>
-                    <div class="vertical-cpc">$0.15 CPC</div>
-                </div>
-                <div class="vertical-card">
-                    <div class="vertical-icon">🎓</div>
-                    <div class="vertical-name">Education</div>
-                    <div class="vertical-cpc">$0.30 CPC</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <div class="cta">
-                <div class="cta-content">
-                    <h2>Ready to Monetize?</h2>
-                    <p>Start earning revenue from your LLM app today. No commitment required.</p>
-                    <a href="#" class="btn btn-primary">Get Started Free</a>
-                </div>
-            </div>
+            <p class="quote">"The future of advertising isn't interruption. It's relevance."</p>
+            <p class="quote-author">— The PromptAds Team</p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>© 2026 PromptAds. Built for the AI economy.</p>
+            <a href="/" class="logo">Prompt<span>Ads</span></a>
+            <p>© 2026 PromptAds. San Francisco, CA.</p>
         </div>
     </footer>
-
-    <!-- WhatsApp Widget -->
-    <script async defer src="https://scripts.withcabin.com/javascript.js"></script>
 </body>
 </html>
