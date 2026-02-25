@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.jsx';
+import Hero from '../components/Hero.jsx';
+import Features from '../components/Features.jsx';
+import Numbers from '../components/Numbers.jsx';
+import Quote from '../components/Quote.jsx';
+import Footer from '../components/Footer.jsx';
+---
+
+<Layout title="PromptAds — The ad network for AI">
+  <Nav client:load />
+  <Hero client:load />
+  <Features client:visible />
+  <Numbers client:visible />
+  <Quote client:visible />
+  <Footer />
+</Layout>
