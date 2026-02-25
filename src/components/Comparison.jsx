@@ -7,29 +7,29 @@ export default function Comparison() {
   ];
 
   return (
-    <section className="py-32 px-6">
+    <section className="py-32 px-6 bg-light-surface">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl font-bold mb-12 text-center text-white font-['Space_Grotesk']">
-          Why we <span className="miro-gradient-text">win</span>
+        <h2 className="text-4xl font-bold mb-12 text-center text-slate-900 font-['Space_Grotesk']">
+          Why we <span className="brand-gradient-text">win</span>
         </h2>
         
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/10 text-slate-400 text-sm uppercase tracking-wider">
+              <tr className="border-b border-slate-100 text-slate-500 text-sm uppercase tracking-wider">
                 <th className="py-4 px-6 font-medium">Feature</th>
-                <th className="py-4 px-6 font-medium miro-gradient-text">PromptAds</th>
+                <th className="py-4 px-6 font-medium brand-gradient-text">PromptAds</th>
                 <th className="py-4 px-6 font-medium">Google AdSense</th>
                 <th className="py-4 px-6 font-medium">Affiliate Links</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-slate-50">
               {rows.map((row, i) => (
-                <tr key={i} className="hover:bg-white/5 transition-colors">
-                  <td className="py-5 px-6 font-semibold text-white">{row.feature}</td>
-                  <td className="py-5 px-6 text-miro-purple font-medium">{row.promptads}</td>
-                  <td className="py-5 px-6 text-slate-400">{row.adsense}</td>
-                  <td className="py-5 px-6 text-slate-400">{row.affiliate}</td>
+                <tr key={i} className="hover:bg-slate-50 transition-colors">
+                  <td className="py-5 px-6 font-semibold text-slate-900">{row.feature}</td>
+                  <td className="py-5 px-6 text-brand-purple font-medium">{row.promptads}</td>
+                  <td className="py-5 px-6 text-slate-600">{row.adsense}</td>
+                  <td className="py-5 px-6 text-slate-600">{row.affiliate}</td>
                 </tr>
               ))}
             </tbody>

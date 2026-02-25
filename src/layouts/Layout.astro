@@ -7,7 +7,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html class="dark" lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,14 +23,14 @@ const { title } = Astro.props;
         theme: {
           extend: {
             colors: {
-              'miro-dark': '#0a0a0a',
-              'miro-surface': '#141414',
-              'miro-purple': '#7c3aed',
-              'miro-pink': '#ec4899',
-              'miro-blue': '#3b82f6',
-              'miro-cyan': '#06b6d4',
-              'miro-gradient-start': '#7c3aed',
-              'miro-gradient-end': '#06b6d4',
+              'light-bg': '#ffffff',
+              'light-surface': '#f8fafc',
+              'light-muted': '#f1f5f9',
+              'light-border': '#e2e8f0',
+              'brand-purple': '#7c3aed',
+              'brand-pink': '#ec4899',
+              'brand-cyan': '#06b6d4',
+              'brand-blue': '#3b82f6',
             },
             fontFamily: {
               display: ["Space Grotesk", "sans-serif"],
@@ -43,31 +43,25 @@ const { title } = Astro.props;
     <style is:global>
       body {
         font-family: 'Inter', sans-serif;
-        background-color: #0a0a0a;
-        color: white;
+        background-color: #ffffff;
+        color: #0f172a;
         -webkit-font-smoothing: antialiased;
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Space Grotesk', sans-serif;
       }
-      .miro-gradient {
+      .brand-gradient {
         background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #06b6d4 100%);
       }
-      .miro-gradient-text {
-        background: linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #22d3ee 100%);
+      .brand-gradient-text {
+        background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #06b6d4 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
-      .glow-purple {
-        box-shadow: 0 0 60px rgba(124, 58, 237, 0.4);
-      }
-      .glow-pink {
-        box-shadow: 0 0 60px rgba(236, 72, 153, 0.3);
-      }
     </style>
   </head>
-  <body class="bg-miro-dark text-white overflow-x-hidden selection:bg-miro-purple selection:text-white">
+  <body class="bg-light-bg text-slate-900 overflow-x-hidden">
     <slot />
   </body>
 </html>

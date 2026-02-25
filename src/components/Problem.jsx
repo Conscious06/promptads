@@ -21,31 +21,28 @@ export default function Problem() {
   ];
 
   return (
-    <section className="py-32 px-6">
+    <section className="py-32 px-6 bg-light-surface">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-['Space_Grotesk']">
-            Why <span className="miro-gradient-text">LLM monetization</span> is broken
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 font-['Space_Grotesk']">
+            Why <span className="brand-gradient-text">LLM monetization</span> is broken
           </h2>
-          <p className="text-slate-400 text-lg">
+          <p className="text-slate-600 text-lg">
             Traditional display ads break the conversational interface. Banners are intrusive, and irrelevant ads ruin trust in AI assistants.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {problems.map((item, i) => (
-            <div key={i} className="group relative bg-miro-surface border border-white/5 p-8 rounded-2xl hover:border-white/20 transition-all duration-300 hover:-translate-y-1">
-              {/* Gradient border on hover */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity -z-10`}></div>
+            <div key={i} className="group relative bg-white border border-slate-200 p-8 rounded-2xl hover:border-slate-300 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity -z-10`}></div>
               
               <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${item.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                 <span className="material-symbols-outlined text-white text-2xl">{item.icon}</span>
               </div>
               
-              <h3 className="text-xl font-bold mb-3 text-white font-['Space_Grotesk']">{item.title}</h3>
-              <p className="text-slate-400 leading-relaxed">{item.desc}</p>
-              
-              <div className={`absolute top-8 right-8 w-24 h-24 bg-gradient-to-r ${item.gradient} opacity-5 rounded-full blur-2xl group-hover:opacity-10 transition-opacity`}></div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900 font-['Space_Grotesk']">{item.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
