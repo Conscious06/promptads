@@ -2,17 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.jsx';
 import Hero from '../components/Hero.jsx';
+import Problem from '../components/Problem.jsx';
+import Solution from '../components/Solution.jsx';
 import Features from '../components/Features.jsx';
-import Numbers from '../components/Numbers.jsx';
-import Quote from '../components/Quote.jsx';
+import Verticals from '../components/Verticals.jsx';
+import Comparison from '../components/Comparison.jsx';
+import Roadmap from '../components/Roadmap.jsx';
+import CTA from '../components/CTA.jsx';
 import Footer from '../components/Footer.jsx';
 ---
 
-<Layout title="PromptAds — The ad network for AI">
+<Layout title="PromptAds - Monetize the Conversation">
   <Nav client:load />
   <Hero client:load />
+  <Problem client:visible />
+  <Solution client:visible />
   <Features client:visible />
-  <Numbers client:visible />
-  <Quote client:visible />
+  <Verticals client:visible />
+  <Comparison client:visible />
+  <Roadmap client:visible />
+  <CTA client:visible />
   <Footer />
 </Layout>

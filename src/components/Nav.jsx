@@ -1,38 +1,24 @@
 export default function Nav() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 py-4 bg-[#0C0C0C]/90 backdrop-blur-xl border-b border-white/[0.06]">
-      <div className="max-w-5xl mx-auto px-6 flex justify-between items-center">
-        <a href="/" className="text-lg font-serif font-medium">
-          Prompt<span className="text-[#3B82F6]">Ads</span>
-        </a>
-
-        <div className="hidden md:flex gap-8">
-          <a href="#how" className="text-base text-[#6B6B6B] hover:text-[#3B82F6] transition-colors">
-            How it works
-          </a>
-          <a href="#features" className="text-base text-[#6B6B6B] hover:text-[#3B82F6] transition-colors">
-            Features
-          </a>
-          <a href="#pricing" className="text-base text-[#6B6B6B] hover:text-[#3B82F6] transition-colors">
-            Pricing
-          </a>
-          <a 
-            href="https://github.com/Conscious06/promptads" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-base text-[#6B6B6B] hover:text-[#3B82F6] transition-colors"
-          >
-            Docs
-          </a>
+    <header className="fixed top-0 left-0 w-full z-50 bg-[#121216]/60 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="text-[#4f46e5]">
+            <span className="material-symbols-outlined" style={{ fontSize: "28px" }}>auto_awesome</span>
+          </div>
+          <span className="font-bold text-xl tracking-tight text-white font-['Space_Grotesk']">PromptAds</span>
         </div>
-
-        <a 
-          href="#"
-          className="inline-flex items-center gap-2 px-5 py-3 bg-[#3B82F6] text-white rounded-full hover:bg-[#60A5FA] hover:scale-[1.02] transition-transform duration-300"
-        >
-          Get Started
-        </a>
+        <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
+          <a className="hover:text-white transition-colors" href="#features">Features</a>
+          <a className="hover:text-white transition-colors" href="#solution">Solution</a>
+          <a className="hover:text-white transition-colors" href="#verticals">Verticals</a>
+          <a className="hover:text-white transition-colors" href="#roadmap">Roadmap</a>
+        </nav>
+        <div className="flex items-center gap-4">
+          <a className="hidden sm:block text-sm font-medium text-slate-300 hover:text-white transition-colors" href="#">Log in</a>
+          <a className="h-9 px-4 rounded-full bg-white text-black text-sm font-semibold hover:bg-slate-200 transition-colors flex items-center" href="#">Get Started</a>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }
