@@ -1,9 +1,97 @@
 import { Ad, AdRequest, AdResult, AdImpression, AdClick } from '../models/types.js';
+import { v4 as uuidv4 } from 'uuid';
 
 // In-memory storage (replace with Redis/DB in production)
 const ads = new Map();
 const impressions: AdImpression[] = [];
 const clicks: AdClick[] = [];
+
+// Sample ads - will be loaded on startup
+const sampleAds: Ad[] = [
+  {
+    id: uuidv4(),
+    advertiserId: 'sample-1',
+    vertical: 'dating',
+    headline: 'Meet Singles Near You',
+    body: 'Join millions of people finding love. Free to join!',
+    cta: 'Download Now',
+    displayUrl: 'datingapp.com',
+    landingUrl: 'https://example.com/dating',
+    keywords: ['dating', 'relationship', 'first date', 'romance', 'single', 'love', 'partner'],
+    countries: ['*'],
+    dailyBudget: 100,
+    totalBudget: 1000,
+    dailySpent: 0,
+    totalSpent: 0,
+    status: 'active',
+    impressions: 0,
+    clicks: 0,
+    conversions: 0
+  },
+  {
+    id: uuidv4(),
+    advertiserId: 'sample-1',
+    vertical: 'productivity',
+    headline: 'Boost Your Productivity',
+    body: 'Get more done in less time with our AI-powered assistant.',
+    cta: 'Try Free',
+    displayUrl: 'productivity.app',
+    landingUrl: 'https://example.com/productivity',
+    keywords: ['productivity', 'work', 'task', 'organization', 'efficiency', 'focus'],
+    countries: ['*'],
+    dailyBudget: 50,
+    totalBudget: 500,
+    dailySpent: 0,
+    totalSpent: 0,
+    status: 'active',
+    impressions: 0,
+    clicks: 0,
+    conversions: 0
+  },
+  {
+    id: uuidv4(),
+    advertiserId: 'sample-2',
+    vertical: 'gaming',
+    headline: 'Play PC Games on Any Device',
+    body: 'Stream AAA games instantly. No download required.',
+    cta: 'Start Playing',
+    displayUrl: 'gamingcloud.io',
+    landingUrl: 'https://example.com/gaming',
+    keywords: ['gaming', 'game', 'pc', 'play', 'stream', 'aaa', 'video game'],
+    countries: ['*'],
+    dailyBudget: 30,
+    totalBudget: 300,
+    dailySpent: 0,
+    totalSpent: 0,
+    status: 'active',
+    impressions: 0,
+    clicks: 0,
+    conversions: 0
+  },
+  {
+    id: uuidv4(),
+    advertiserId: 'sample-3',
+    vertical: 'education',
+    headline: 'Learn Any Language Fast',
+    body: 'AI-powered language learning that actually works.',
+    cta: 'Start Free Trial',
+    displayUrl: 'languagelearn.io',
+    landingUrl: 'https://example.com/education',
+    keywords: ['language', 'learn', 'study', 'education', 'tutor', 'course', 'teacher'],
+    countries: ['*'],
+    dailyBudget: 40,
+    totalBudget: 400,
+    dailySpent: 0,
+    totalSpent: 0,
+    status: 'active',
+    impressions: 0,
+    clicks: 0,
+    conversions: 0
+  }
+];
+
+// Load sample ads
+sampleAds.forEach(ad => ads.set(ad.id, ad));
 
 // Frequency capping
 const frequencyCap = new Map();

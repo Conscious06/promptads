@@ -1,4 +1,30 @@
 export default function Solution() {
+  const codeExample = `// 1. Initialize the SDK
+const ads = new PromptAds({
+  apiKey: 'pk_your_api_key',
+  appId: 'your-app-id',
+  apiUrl: 'https://api.promptads.io'
+});
+
+// 2. Check if ad should be shown
+const result = await ads.shouldShow({
+  prompt: userMessage,
+  response: aiResponse,
+  sessionId: sessionId,
+  vertical: 'dating'
+});
+
+// 3. Display the ad
+if (result.shouldShow && result.ad) {
+  renderInlineAd(result.ad);
+}
+
+// 4. Track clicks
+adElement.onClick = () => {
+  ads.recordClick(result.ad.id, sessionId);
+  window.open(result.ad.landingUrl);
+}`;
+
   return (
     <section className="py-24 bg-[#121216] border-y border-white/5" id="solution">
       <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16 items-center">
@@ -36,59 +62,24 @@ export default function Solution() {
           </ul>
         </div>
 
-        {/* Chat Demo */}
+        {/* Code Demo */}
         <div className="lg:w-1/2 w-full">
-          <div className="relative bg-black rounded-2xl border border-white/10 p-6 shadow-2xl overflow-hidden">
+          <div className="relative bg-black rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500"></div>
-                <span className="text-sm font-semibold">AI Assistant</span>
+            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 bg-white/5">
+              <div className="flex gap-2">
+                <span className="w-3 h-3 rounded-full bg-red-500/50"></span>
+                <span className="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+                <span className="w-3 h-3 rounded-full bg-green-500/50"></span>
               </div>
-              <span className="material-symbols-outlined text-slate-500">more_horiz</span>
+              <span className="text-xs text-slate-500">PromptAds SDK</span>
             </div>
 
-            {/* Chat Messages */}
-            <div className="space-y-6 text-sm">
-              {/* User */}
-              <div className="flex justify-end">
-                <div className="bg-[#4f46e5] text-white px-4 py-3 rounded-2xl rounded-tr-sm max-w-[80%]">
-                  I'm planning a trip to Tokyo next month. Any recommendations for hotels in Shinjuku?
-                </div>
-              </div>
-
-              {/* AI */}
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 shrink-0"></div>
-                <div className="space-y-4 max-w-[90%]">
-                  <p className="text-slate-300">Shinjuku is a fantastic choice! It's vibrant and central. Here are a few top-rated options depending on your budget:</p>
-                  <p className="text-slate-300">
-                    1. <strong className="text-white">Park Hyatt Tokyo:</strong> Luxury with iconic views.<br/>
-                    2. <strong className="text-white">Hotel Gracery:</strong> Great mid-range option right in the action.
-                  </p>
-                  
-                  {/* Ad Injection */}
-                  <div className="mt-4 p-4 rounded-xl border border-[#4f46e5]/30 bg-[#4f46e5]/5 relative group cursor-pointer transition-all hover:bg-[#4f46e5]/10">
-                    <div className="absolute -top-2.5 right-4 bg-[#050507] border border-[#4f46e5]/30 text-[10px] text-[#4f46e5] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">
-                      Sponsored
-                    </div>
-                    <div className="flex gap-3">
-                      <div className="w-10 h-10 rounded bg-white flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-black">flight</span>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-semibold text-sm">Save 15% on Tokyo Flights</h4>
-                        <p className="text-slate-400 text-xs mt-1">Book your direct flight to Haneda with GlobalAir. Limited time offer.</p>
-                      </div>
-                      <div className="ml-auto self-center">
-                        <span className="material-symbols-outlined text-[#4f46e5]">chevron_right</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-slate-300">Would you like me to create an itinerary for your first day?</p>
-                </div>
-              </div>
+            {/* Code */}
+            <div className="p-6 overflow-x-auto">
+              <pre className="text-xs md:text-sm text-slate-300 font-mono leading-relaxed">
+                <code>{codeExample}</code>
+              </pre>
             </div>
           </div>
         </div>
