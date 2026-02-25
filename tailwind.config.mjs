@@ -4,17 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#000000',
-        'bg-warm': '#0a0908',
-        text: '#f5f5f0',
-        'text-muted': '#8a8a85',
-        accent: '#d4a853',
-        'accent-dim': '#a38542',
-        line: '#2a2a28'
+        bg: '#030303',
+        surface: '#0C0C0C',
+        border: '#1A1A1A',
+        text: '#F5F5F0',
+        'text-muted': '#6B6B6B',
+        accent: '#3B82F6',
+        'accent-hover': '#60A5FA',
       },
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],
-        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       }
     }
   },

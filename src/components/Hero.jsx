@@ -9,66 +9,42 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-20 relative overflow-hidden">
-      {/* Background gradient */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(212,168,83,0.08) 0%, transparent 60%)'
-        }}
-      />
-
-      {/* Animated rings */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <div 
-          className={`w-96 h-96 rounded-full border border-[#2a2a28] transition-all duration-1000 ease-out ${mounted ? 'opacity-50 scale-100' : 'opacity-0 scale-90'}`}
-          style={{ animation: 'pulse 8s ease-in-out infinite' }}
-        />
-        <div 
-          className={`absolute w-72 h-72 rounded-full border border-[#a38542] transition-all duration-1000 delay-200 ease-out ${mounted ? 'opacity-30 scale-100' : 'opacity-0 scale-90'}`}
-          style={{ animation: 'pulse 8s ease-in-out infinite 2s' }}
-        />
-      </div>
+      {/* Minimal background - no gradient */}
+      <div className="absolute inset-0 bg-[#030303]" />
 
       <div className="relative z-10 max-w-3xl mx-auto">
-        <p className="text-xs uppercase tracking-[0.2em] text-[#d4a853] mb-6">
+        <p className="text-xs uppercase tracking-[0.2em] text-[#3B82F6] mb-6">
           The ad network for AI
         </p>
 
-        <h1 className="font-serif text-5xl md:text-7xl leading-tight mb-6">
+        <h1 className="font-serif text-5xl md:text-7xl leading-tight mb-6 text-[#F5F5F0]">
           Monetize conversations.<br />
-          <span className="text-[#d4a853]">Not interrupts.</span>
+          <span className="text-[#3B82F6]">Not interrupts.</span>
         </h1>
 
-        <p className="text-lg text-[#8a8a85] max-w-md mx-auto mb-10 font-light">
+        <p className="text-lg text-[#6B6B6B] max-w-md mx-auto mb-10 font-light">
           Ads that live inside LLM responses. Native. Relevant. Non-intrusive.
         </p>
 
         <a 
           href="#"
-          className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#f5f5f0] text-[#000000] text-sm font-medium rounded-full hover:scale-[1.02] transition-transform duration-300"
+          className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#3B82F6] text-white text-sm font-medium rounded-full hover:bg-[#60A5FA] transition-colors duration-300"
         >
           Integrate SDK <span>→</span>
         </a>
 
-        {/* Abstract visual */}
-        <div className="mt-20 w-full max-w-2xl mx-auto aspect-video bg-gradient-to-br from-[#1a1918] to-[#0d0c0b] rounded-2xl border border-[#2a2a28] relative flex items-center justify-center overflow-hidden">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-full border-2 border-[#d4a853] flex items-center justify-center text-2xl">
-              $
+        {/* Simple visual - just text and symbol */}
+        <div className="mt-20 w-full max-w-xl mx-auto">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl border border-[#1A1A1A] mb-6">
+              <span className="text-3xl font-serif text-[#3B82F6]">$</span>
             </div>
-            <span className="text-xs uppercase tracking-widest text-[#8a8a85]">
+            <p className="text-sm uppercase tracking-widest text-[#6B6B6B]">
               Contextual by default
-            </span>
+            </p>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.1); opacity: 0.2; }
-        }
-      `}</style>
     </section>
   );
 }
