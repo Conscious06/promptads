@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptAds - Monetize Your LLM App</title>
+    <meta name="description" content="AI-native advertising network for LLM applications. 70% revenue share for publishers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-secondary: #12121a;
+            --text: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent: #6366f1;
+            --accent-glow: #818cf8;
+            --success: #10b981;
+            --border: #1e1e2e;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 100px;
+            font-size: 14px;
+            color: var(--accent-glow);
+            margin-bottom: 24px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-buttons .btn {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 80px;
+            padding: 32px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* How it works */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .step {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Verticals */
+        .verticals-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .vertical-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .vertical-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .vertical-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .vertical-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .vertical-cpc {
+            font-size: 14px;
+            color: var(--success);
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 24px;
+            padding: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            .verticals-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            nav {
+                display: none;
+            }
+            .cta {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="/" class="logo">
+                <div class="logo-icon">$</div>
+                PromptAds
+            </a>
+            <nav>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#verticals">Verticals</a>
+                <a href="#pricing">Pricing</a>
+                <a href="https://github.com/Conscious06/promptads" target="_blank">Docs</a>
+                <a href="#" class="btn btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Now in Beta
+            </div>
+            
+            <h1>Monetize Your <span>LLM App</span><br>with Native Ads</h1>
+            
+            <p class="hero-desc">
+                The advertising network built for AI applications. 
+                Integrate our SDK and earn revenue from every conversation.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">
+                    Start Monetizing →
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">
+                    See How It Works
+                </a>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">3-10%</div>
+                    <div class="stat-label">Average CTR</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">70%</div>
+                    <div class="stat-label">Publisher Revenue</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">4+</div>
+                    <div class="stat-label">Verticals</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">5min</div>
+                    <div class="stat-label">Integration Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-desc">Integrate ads into your LLM app in minutes. No hassle, just revenue.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Install SDK</h3>
+                    <p>Add our lightweight SDK to your app with a few lines of code. Available for web and mobile.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Display Ads</h3>
+                    <p>Our SDK automatically displays context-relevant ads within LLM responses when appropriate.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Earn Revenue</h3>
+                    <p>Get paid for every impression and click. 70% revenue share, paid monthly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="verticals">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Supported Verticals</h2>
+                <p class="section-desc">We support multiple verticals with high CPM rates.</p>
+            </div>
+
+            <div class="verticals-grid">
+                <div class="vertical-card">
+                    <div class="vertical-icon">💕</div>
+                    <div class="vertical-name">Dating</div>
+                    <div class="vertical-cpc">$0.50 CPC</div>
+                </div>
+                <div class="vertical-card">
+                    <div class="vertical-icon">💼</div>
+                    <div class="vertical-name">Productivity</div>
+                    <div class="vertical-cpc">$0.25 CPC</div>
+                </div>
+                <div class="vertical-card">
+                    <div class="vertical-icon">🎮</div>
+                    <div class="vertical-name">Gaming</div>
+                    <div class="vertical-cpc">$0.15 CPC</div>
+                </div>
+                <div class="vertical-card">
+                    <div class="vertical-icon">🎓</div>
+                    <div class="vertical-name">Education</div>
+                    <div class="vertical-cpc">$0.30 CPC</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="cta">
+                <div class="cta-content">
+                    <h2>Ready to Monetize?</h2>
+                    <p>Start earning revenue from your LLM app today. No commitment required.</p>
+                    <a href="#" class="btn btn-primary">Get Started Free</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 PromptAds. Built for the AI economy.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Widget -->
+    <script async defer src="https://scripts.withcabin.com/javascript.js"></script>
+</body>
+</html>
